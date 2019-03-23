@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,6 +20,12 @@ public class ProductsService {
     @Autowired
     public void setProductRepository(ProductRepository productRepository) {
         this.productRepository = productRepository;
+    }
+
+    public List<Product> getAllProducts(){
+        List<Product> list = new ArrayList<>();
+        productRepository.findAll().forEach(e -> list.add(e));
+        return list;
     }
 
     public Optional<Product> getProduct(int id) {
